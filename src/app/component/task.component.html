@@ -1,0 +1,47 @@
+<form [formGroup]="todoForm" (submit)="saveForm()">
+    <table>
+        <thead><h1>Todo</h1></thead>
+        <tbody>
+            <tr>
+                <td>Title:</td>
+                <td><input type="text" placeholder="What's up doc?" size="30" formControlName="title"></td>
+            </tr>
+            <tr>
+                <td>Name:</td>
+                <td><input type="text" size="30" formControlName="name"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <button type="button" (click)="addTask()">AddTask</button>
+                    <button type="submit">Save</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table *ngIf="todoArray.length > 0 else noTaskAdded">
+        <thead>
+            <td>Description</td>
+            <td>Priority</td>
+            <td>Due date</td>
+        </thead>
+        <tbody formArrayName="tasks">
+            <tr *ngFor="let t of todoArray.controls; let i = index" [formGroupName]="i">
+                <td><input type="text" formControlName="description"></td>
+                <td>
+                    <select formControlName="priority">
+                        <option value="low">Low</option>
+                        <option value="medium">medium</option>
+                        <option value="high">high</option>
+                    </select>
+                </td>
+                <td><input type="date" formControlName="date">
+                </td>
+                <td><button type="button" (click)="remove(i)">X</button></td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+
+<ng-template #noTaskAdded></ng-template>

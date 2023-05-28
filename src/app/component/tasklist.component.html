@@ -1,0 +1,19 @@
+<table>
+    <thead><h1>Task List</h1></thead>
+    <tbody *ngIf="todos.length > 0 else noTaskAdded">
+        <tr>
+            <td>Name</td>
+            <td>Title</td>
+            <td>Number of tasks</td>
+        </tr>
+        <tr *ngFor="let t of todos; let i = index" (click)="selected(i)">
+            <td>{{ t.name }}</td>
+            <td>{{ t.title }}</td>
+            <td>{{ t.tasks.length }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<ng-template #noTaskAdded>
+    Hello, hello, don't procrastinate!
+</ng-template>
